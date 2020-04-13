@@ -1,0 +1,5 @@
+spring:
+  message: Test message
+
+server:
+  port: 8010
