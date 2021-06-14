@@ -5,11 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("tacos")
+@ComponentScan(value = { "tacos" })
 public class TacoCloudApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TacoCloudApplication.class, args);
 	}
-
 }
