@@ -4,13 +4,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
+
 import tacos.entity.Order;
 import tacos.entity.Taco;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+@Repository
 public class JdbcOrderRepository implements OrderRepository {
     private SimpleJdbcInsert orderInserter;
     private SimpleJdbcInsert orderTacoInserter;
@@ -29,7 +33,7 @@ public class JdbcOrderRepository implements OrderRepository {
         order.setCreatedAt(LocalDateTime.now());
         String orderId = saveOrderDetails(order);
         order.setId(orderId);
-        order.getTacos().foreach(taco -> saveTacoToOrder(taco, orderId));
+        order.getTacos().forEach(taco -> saveTacoToOrder(taco, orderId));
 
         return order;
     }
@@ -43,7 +47,7 @@ public class JdbcOrderRepository implements OrderRepository {
         return values.get("id").toString();
     }
 
-    private void saveTacoToOrder(Taco taco, long orderId) {
+    private void saveTacoToOrder(Taco taco, String orderId) {
         Map<String, Object> values = new HashMap<>();
         values.put("tacoOrder", orderId);
         values.put("taco", taco.getId());

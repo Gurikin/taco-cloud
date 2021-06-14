@@ -19,7 +19,6 @@ import tacos.entity.Taco;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,13 +31,10 @@ public class DesignTacoController {
     private final TacoRepository tacoRepository;
 
     @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepository,
-                                TacoRepository tacoRepository
-    ) {
+    public DesignTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
         this.ingredientRepository = ingredientRepository;
         this.tacoRepository = tacoRepository;
     }
-
 
     @GetMapping
     public String showDesignForm(Model model) {
@@ -47,8 +43,7 @@ public class DesignTacoController {
         Type[] types = Type.values();
 
         for (Type type : types) {
-            model.addAttribute(type.toString().toLowerCase(),
-                    filterByType(ingredients, type));
+            model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
         }
         model.addAttribute("taco", new Taco());
 
@@ -70,25 +65,20 @@ public class DesignTacoController {
      * @return String
      */
     @PostMapping
-    public String processDesign (@Valid Taco taco,
-                                 Errors errors,
-                                 @ModelAttribute Order order) {
+    public String processDesign(@Valid Taco taco, Errors errors, @ModelAttribute Order order) {
         if (errors.hasErrors()) {
             return "design";
         }
 
         Taco saved = tacoRepository.save(taco);
-        order.addDesign(saved);
+        order.addTaco(saved);
 
-        log.info ("Processing design: " + taco);
+        log.info("Processing design: " + taco);
 
         return "redirect:/orders/current";
     }
 
     private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
-        return ingredients
-                .stream()
-                .filter(i -> i.getType() == type)
-                .collect(Collectors.toList());
+        return ingredients.stream().filter(i -> i.getType() == type).collect(Collectors.toList());
     }
 }
