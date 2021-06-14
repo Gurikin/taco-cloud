@@ -4,16 +4,24 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Order extends BaseEntity {
+@Entity
+@Table(name = "Taco_Order")
+public class Order extends BaseEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @NotBlank(message = "Name is required")
     private String name;
     @NotBlank(message = "Street is required")
@@ -30,6 +38,7 @@ public class Order extends BaseEntity {
     private String ccExpiration;
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     private String ccCVV;
+    @ManyToMany(targetEntity = Taco.class)
     private List<Taco> tacos = new ArrayList<>();
 
     public void addTaco(Taco taco) {
