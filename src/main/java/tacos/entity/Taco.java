@@ -14,5 +14,5 @@ public class Taco extends BaseEntity {
     @Size(min = 5, message = "The name must be at least 5 character long")
     private String name;
     @Size(min = 1, message = "Choose 1 ingredient at least, please")
-    private List<String> ingredients;
+    private List<Ingredient> ingredients;
 }
