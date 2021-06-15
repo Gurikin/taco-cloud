@@ -4,19 +4,13 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password:
+    scripts:
+      - classpath:jdbc/schema.sql
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
     hibernate:
-      ddl-auto: update
-#      properties:
-#        javax:
-#          persistence:
-#            schema-generation:
-#              scripts:
-#                create-source: metadata
-#                action: create
-#                create-target: classpath:schema.sql
+      ddl-auto: none
   h2:
     console:
       enabled: true

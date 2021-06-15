@@ -12,30 +12,29 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories(value = {"tacos.data"})
+@EnableJpaRepositories(value = { "tacos.data" })
 public class DbConfig {
     @Bean
     public DataSource dataSource() {
-        return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.H2)
-                .addScript("classpath:jdbc/schema.sql")
-                .addScript("classpath:jdbc/data.sql")
-                .build();
+        return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).addScript("classpath:jdbc/schema.sql")
+                .addScript("classpath:jdbc/data.sql").build();
     }
-//
-//    @Bean
-//    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-//        return new JdbcTemplate(dataSource);
-//    }
-//
-//    @Bean("entityManagerFactory")
-//    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
-//        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-//        entityManagerFactoryBean.setDataSource(dataSource);
-//        entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-//
-////        entityManagerFactoryBean.setJpaProperties(hibProperties());
-//
-//        return entityManagerFactoryBean;
-//    }
+    //
+    // @Bean
+    // public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+    // return new JdbcTemplate(dataSource);
+    // }
+    //
+    // @Bean("entityManagerFactory")
+    // public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource
+    // dataSource) {
+    // LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new
+    // LocalContainerEntityManagerFactoryBean();
+    // entityManagerFactoryBean.setDataSource(dataSource);
+    // entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
+    //
+    //// entityManagerFactoryBean.setJpaProperties(hibProperties());
+    //
+    // return entityManagerFactoryBean;
+    // }
 }
