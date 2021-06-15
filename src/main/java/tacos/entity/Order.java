@@ -5,6 +5,8 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
@@ -18,6 +20,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "Taco_Order")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Order extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

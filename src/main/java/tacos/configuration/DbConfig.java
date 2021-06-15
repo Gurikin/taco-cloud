@@ -3,6 +3,7 @@ package tacos.configuration;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -11,6 +12,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import javax.sql.DataSource;
 
 @Configuration
+@EnableJpaRepositories(value = {"tacos.data"})
 public class DbConfig {
     @Bean
     public DataSource dataSource() {
@@ -20,20 +22,20 @@ public class DbConfig {
                 .addScript("classpath:jdbc/data.sql")
                 .build();
     }
-
-    @Bean
-    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
-    }
-
-    @Bean("entityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
-        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setDataSource(dataSource);
-        entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-
-//        entityManagerFactoryBean.setJpaProperties(hibProperties());
-
-        return entityManagerFactoryBean;
-    }
+//
+//    @Bean
+//    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+//        return new JdbcTemplate(dataSource);
+//    }
+//
+//    @Bean("entityManagerFactory")
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+//        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+//        entityManagerFactoryBean.setDataSource(dataSource);
+//        entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
+//
+////        entityManagerFactoryBean.setJpaProperties(hibProperties());
+//
+//        return entityManagerFactoryBean;
+//    }
 }
