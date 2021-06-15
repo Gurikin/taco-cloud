@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 @Data
@@ -16,21 +18,20 @@ import javax.persistence.Table;
 @Table(name = "Ingredient")
 public class Ingredient extends BaseEntity {
     private final String name;
+    @Enumerated(EnumType.STRING)
     private final Type type;
 
-    public Ingredient(String id, LocalDateTime createdAt, String name, Type type) {
+    public Ingredient(String id, LocalDateTime createdAt, String name, String type) {
         super(id, createdAt);
         this.name = name;
-        this.type = type;
-    }
-
-    public Ingredient(String id, String name, Type type) {
-        super(id, LocalDateTime.now());
-        this.name = name;
-        this.type = type;
+        this.type = Type.getTypeByName(type);
     }
 
     public enum Type {
         WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE;
+
+        public static Type getTypeByName(String name) {
+            return valueOf(name);
+        }
     }
 }
