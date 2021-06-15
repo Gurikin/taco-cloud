@@ -7,6 +7,7 @@ import tacos.entity.Ingredient;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Repository
@@ -24,15 +25,15 @@ public class JdbcIngredientRepositoryImpl implements IngredientJdbcRepository {
     }
 
     private Ingredient mapRowToIngredient(ResultSet resultSet, int i) throws SQLException {
-        return new Ingredient(resultSet.getString("id"), resultSet.getString("name"),
-                Ingredient.Type.valueOf(resultSet.getString("type")));
+        return new Ingredient(resultSet.getString("id"), LocalDateTime.now(), resultSet.getString("name"),
+                resultSet.getString("type"));
     }
 
     @Override
     public Ingredient findById(String id) {
         return jdbcTemplate.queryForObject("select id, name, type from Ingredient where id=?",
-                (resultSet, i) -> new Ingredient(resultSet.getString("id"), resultSet.getString("name"),
-                        Ingredient.Type.valueOf(resultSet.getString("type"))));
+                (resultSet, i) -> new Ingredient(resultSet.getString("id"), LocalDateTime.now(),
+                        resultSet.getString("name"), resultSet.getString("type")));
     }
 
     @Override
