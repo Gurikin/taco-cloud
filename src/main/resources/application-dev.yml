@@ -1,5 +1,19 @@
 spring:
-  message: Test message
+  datasource:
+    url: 'jdbc:h2:mem:testdb'
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+    scripts:
+      - classpath:jdbc/schema.sql
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  h2:
+    console:
+      enabled: true
 
 server:
   port: 8010

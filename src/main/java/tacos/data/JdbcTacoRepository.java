@@ -16,7 +16,7 @@ import java.util.UUID;
 import static java.util.Arrays.asList;
 
 @Repository
-public class JdbcTacoRepository implements TacoRepository {
+public class JdbcTacoRepository implements TacoJdbcRepository {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired

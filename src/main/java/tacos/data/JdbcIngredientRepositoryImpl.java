@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 
 @Repository
-public class JdbcIngredientRepositoryImpl implements IngredientRepository {
+public class JdbcIngredientRepositoryImpl implements IngredientJdbcRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired

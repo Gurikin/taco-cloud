@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Repository
-public class JdbcOrderRepository implements OrderRepository {
+public class JdbcOrderRepository implements OrderJdbcRepository {
     private SimpleJdbcInsert orderInserter;
     private SimpleJdbcInsert orderTacoInserter;
     private ObjectMapper objectMapper;

@@ -4,9 +4,16 @@ import java.time.LocalDateTime;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor(force = true)
+@Entity
+@Table(name = "Ingredient")
 public class Ingredient extends BaseEntity {
     private final String name;
     private final Type type;
