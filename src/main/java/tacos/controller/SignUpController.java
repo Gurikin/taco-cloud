@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.extern.slf4j.Slf4j;
 import tacos.data.UserRepository;
 import tacos.security.SignUpForm;
 
+@Slf4j
 @Controller
 @RequestMapping("/signup")
 public class SignUpController {
@@ -35,7 +37,7 @@ public class SignUpController {
     @PostMapping
     public String processSignUp(@Valid SignUpForm signUpForm, Errors errors) {
         if (errors.hasErrors()) {
-            return "orderForm";
+            return "signUpForm";
         }
         userRepository.save(signUpForm.toUser(passwordEncoder));
         return "redirect:/login";

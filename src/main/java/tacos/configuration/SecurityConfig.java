@@ -10,6 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import tacos.security.AppAuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -29,6 +32,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/design", "/orders").hasRole("USER").antMatchers("/", "/**").permitAll();
+        http.authorizeRequests()
+            .antMatchers("/", "/**", "/login", "/signup", "/h2-console/**").permitAll()
+            .anyRequest().authenticated()
+            .and()
+                .formLogin().successHandler(appAuthenticationSuccessHandler())
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/design", true)
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+            .and()
+                .logout()
+                .logoutSuccessUrl("/");
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler appAuthenticationSuccessHandler() {
+        return new AppAuthenticationSuccessHandler();
     }
 }
