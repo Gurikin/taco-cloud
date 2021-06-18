@@ -11,6 +11,4 @@ public class AppAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
         super();
         setUseReferer(true);
     }
-    // protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-    // }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
 import tacos.data.UserRepository;
+import tacos.entity.User;
 import tacos.security.SignUpForm;
 
 @Slf4j
@@ -39,7 +40,11 @@ public class SignUpController {
         if (errors.hasErrors()) {
             return "signUpForm";
         }
-        userRepository.save(signUpForm.toUser(passwordEncoder));
+        User user = signUpForm.toUser(passwordEncoder);
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+            return "signUpForm";
+        };
+        userRepository.save(user);
         return "redirect:/login";
     }
 }
