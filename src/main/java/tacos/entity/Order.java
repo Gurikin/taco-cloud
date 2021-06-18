@@ -4,10 +4,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
@@ -36,6 +38,7 @@ public class Order extends BaseEntity implements Serializable {
     @NotBlank(message = "Zip is required")
     private String zip;
     @CreditCardNumber(message = "Not a valid credit card number")
+    @Column(name = "cc_number")
     private String ccNumber;
     @Pattern(regexp = "^(0[1-9]|1[0-2])([/])([1-9][0-9])$", message = "Must be formatted MM/YY")
     private String ccExpiration;
@@ -43,6 +46,8 @@ public class Order extends BaseEntity implements Serializable {
     private String ccCVV;
     @ManyToMany(targetEntity = Taco.class)
     private List<Taco> tacos = new ArrayList<>();
+    @ManyToOne
+    private User user;
 
     public void addTaco(Taco taco) {
         this.tacos.add(taco);
