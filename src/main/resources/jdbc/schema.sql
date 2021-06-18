@@ -53,3 +53,16 @@ alter table
     Taco_Order_Tacos
 add
     foreign key (tacos_id) references Taco (id);
+
+CREATE MEMORY TABLE PUBLIC.USER(
+    id varchar(255) not null primary key,
+    created_at timestamp,
+    city varchar(255),
+    full_name varchar(255),
+    `password` varchar(255),
+    phone_number varchar(255),
+    `state` varchar(255),
+    street varchar(255),
+    username varchar(255) not null,
+    zip varchar(255)
+);
