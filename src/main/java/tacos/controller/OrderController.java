@@ -3,7 +3,6 @@ package tacos.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import tacos.data.OrderRepository;
-import tacos.data.UserRepository;
 import tacos.entity.Order;
 import tacos.entity.User;
 
@@ -27,12 +25,10 @@ import tacos.entity.User;
 @SessionAttributes("order")
 public class OrderController {
     private OrderRepository orderRepository;
-    private UserRepository userRepo;
 
     @Autowired
-    public OrderController(OrderRepository orderRepository, UserRepository userRepo) {
+    public OrderController(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
-        this.userRepo = userRepo;
     }
 
     /**
