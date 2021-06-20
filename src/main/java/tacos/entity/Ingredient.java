@@ -9,13 +9,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Table;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor(force = true)
 @Entity
-@Table(name = "Ingredient")
 public class Ingredient extends BaseEntity {
     private final String name;
     @Enumerated(EnumType.STRING)
