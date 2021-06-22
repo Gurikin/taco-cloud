@@ -8,6 +8,7 @@ spring:
     password:
     scripts:
       - classpath:jdbc/schema.sql
+      - classpath:jdbc/data.sql
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
