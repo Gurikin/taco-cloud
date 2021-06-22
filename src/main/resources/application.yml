@@ -25,3 +25,12 @@ server:
     key-store: mykeys.jks
     key-store-password: 112233
     key-password: 112233
+
+logging:
+  path: /var/logs/
+  file: tacoCloud.log
+  level:
+    root: WARN
+    org:
+      springframework:
+        security: DEBUG

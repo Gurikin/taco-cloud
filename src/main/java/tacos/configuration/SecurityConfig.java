@@ -32,6 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
+        http.requiresChannel().anyRequest().requiresSecure();
         http.authorizeRequests()
             .antMatchers("/design", "/order/**").authenticated()
             .antMatchers("/", "/**", "/login", "/signup", "/h2-console/**").permitAll()
@@ -45,9 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .logout()
                 .logoutSuccessUrl("/");
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
-        http.requiresChannel().anyRequest().requiresSecure();
     }
 
     @Bean
