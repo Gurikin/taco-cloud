@@ -4,5 +4,11 @@
       "name": "spring.message",
       "type": "java.lang.String",
       "description": "Description for spring.message."
-  }
-] }
+    },
+    {
+      "name": "taco.orders.pageSize",
+      "type": "java.lang.String",
+      "description": "Description for taco.orders.pageSize."
+    }
+  ]
+}
