@@ -37,3 +37,6 @@ mykeys.jks
 ### var ###
 /var/
 /logs/
+
+### angular ###
+tacocloud-ui/package-lock.json
