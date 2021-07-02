@@ -34,10 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.headers().frameOptions().disable();
-        http.requiresChannel().anyRequest().requiresSecure();
         http.authorizeRequests()
-            .antMatchers("/design", "/order/**").authenticated()
             .antMatchers("/", "/**", "/login", "/signup", "/h2-console/**").permitAll()
+            .antMatchers("/design", "/order/**").authenticated()
             .anyRequest().authenticated()
             .and()
                 .formLogin().successHandler(appAuthenticationSuccessHandler())

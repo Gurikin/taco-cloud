@@ -23,12 +23,7 @@ spring:
       enabled: true
 
 server:
-  port: 8443
-  ssl:
-    key-alias: tomcat
-    key-store: mykeys.jks
-    key-store-password: 112233
-    key-password: 112233
+  port: 8080
 
 logging:
   path: /var/logs/
