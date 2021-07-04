@@ -1,0 +1,56 @@
+security:
+  user:
+    name: buzz
+    password: infinity
+
+taco:
+  orders:
+    pageSize: 10
+
+
+  discount:
+    codes:
+      abcdef: 10
+      
+#logging:
+#  level:
+#    org.springframework.data.rest: debug
+
+spring:
+  data:
+    rest:
+      base-path: /api
+
+server:
+  port: 8010
+
+---
+spring:
+  profiles: prod
+  
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/tacocloud
+    username: tacouser
+    password: tacopassword
+    scripts:
+      - classpath:jdbc/schema.sql
+      - classpath:jdbc/data.sql
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      jdbc:
+        lob:
+          non_contextual_creation: true
+    
+logging:
+  level:
+    tacos: WARN
+    
