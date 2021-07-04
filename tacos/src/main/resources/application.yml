@@ -20,6 +20,24 @@ spring:
   data:
     rest:
       base-path: /api
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/tacocloud
+    username: tacouser
+    password: tacopassword
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      jdbc:
+        lob:
+          non_contextual_creation: true
 
 server:
   port: 8010
@@ -27,16 +45,18 @@ server:
 ---
 spring:
   profiles: prod
+
+  sql:
+    init:
+      mode: always
   
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/tacocloud
     username: tacouser
     password: tacopassword
-    scripts:
-      - classpath:jdbc/schema.sql
-      - classpath:jdbc/data.sql
   jpa:
+    defer-datasource-initialization: true
     properties:
       hibernate:
         temp:
